@@ -1,0 +1,253 @@
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #d9d9d9;
+  overflow: hidden;
+  flex-wrap: wrap;
+  padding: 16px;
+  gap: 30px;
+}
+
+.promo-card {
+  background-color: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  width: 300px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 2;
+  position: relative;
+
+  img {
+    width: 180px;
+    height: auto;
+    border-radius: 100%;
+    margin-bottom: 30px;
+    margin-left: 20px;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #3c3c3c;
+    margin: 0;
+    margin-left: 20px;
+  }
+}
+
+.auth-card {
+  background-color: white;
+  width: 350px;
+  border-radius: 10px;
+  padding: 32px 24px 24px 24px;
+  box-shadow: 0px 0px 10px #ccc;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden !important;
+  height: auto;
+  position: relative;
+  margin-left: -100px;
+  z-index: 2;
+  height: 460px;
+
+  .login-form,
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    margin-top: 32px
+  }
+
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .forgot-password {
+    font-size: 12px;
+    color: #757575;
+    text-align: right;
+    margin-bottom: 12px;
+  }
+
+  .login-btn,
+  .full-width {
+    width: 100%;
+    background-color: #a03037 !important;
+    color: white;
+    font-weight: 500;
+    border-radius: 4px;
+    height: 36px;
+    font-size: 13px;
+    margin-top: 8px;
+    transition: background-color 0.3s ease;
+  }
+
+  .login-btn:hover,
+  .full-width:hover {
+    background-color: #871f28;
+  }
+
+  .or-divider {
+    text-align: center;
+    font-weight: 600;
+    margin: 10px 0;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: #ccc;
+    }
+
+    &::before {
+      left: 0;
+    }
+
+    &::after {
+      right: 0;
+    }
+  }
+
+  .social-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+
+    button {
+      flex: 1;
+      height: 36px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+
+      &:first-child {
+        background-color: #3b5998;
+        color: white;
+      }
+
+      &:first-child:hover {
+        background-color: #2d4373;
+      }
+
+      &:last-child {
+        background-color: #f1f1f1;
+        color: black;
+        border: 1px solid #ccc;
+      }
+
+      &:last-child:hover {
+        background-color: #e0e0e0;
+      }
+    }
+  }
+}
+
+/* Tabs Styling */
+::ng-deep .mat-tab-label {
+  font-weight: 700 !important;
+  color: #333 !important;
+}
+
+::ng-deep .mat-tab-label-active {
+  font-weight: 700 !important;
+  color: #000 !important;
+  border-bottom: 3px solid #a03037 !important;
+}
+
+::ng-deep .mat-ink-bar {
+  background-color: #a03037 !important;
+  height: 3px !important;
+}
+
+/* Scroll Fix */
+::ng-deep .mat-tab-body-content {
+  height: auto !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+::ng-deep .mat-tab-body-wrapper {
+  overflow: hidden !important;
+  height: auto !important;
+  padding: 0 !important;
+}
+
+/* Snackbar Styles */
+::ng-deep .green-snackbar {
+  background-color: #4caf50 !important;
+  color: white;
+}
+
+::ng-deep .red-snackbar {
+  background-color: #f44336 !important;
+  color: white;
+}
+
+/* Caret and Selection */
+.auth-wrapper,
+.promo-card,
+.auth-card {
+  user-select: none;
+  outline: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  caret-color: transparent;
+}
+
+mat-form-field input {
+  caret-color: auto !important;
+  user-select: text !important;
+}
+
+/* Responsive - Hide Image Card */
+@media (max-width: 768px) {
+  .promo-card {
+    display: none !important;
+  }
+
+  .auth-wrapper {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
+  .auth-card {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .promo-card h3 {
+    font-size: 14px;
+  }
+
+  .auth-card {
+    padding: 16px;
+    max-height: 90vh;
+    overflow: hidden !important;
+  }
+}
+
+
+::ng-deep .mat-mdc-tab-body-content {
+  overflow: hidden !important;
+  height: auto !important;
+  scrollbar-width: none !important;
+}
+
+::ng-deep .mat-mdc-tab-body-content::-webkit-scrollbar {
+  display: none;
+}

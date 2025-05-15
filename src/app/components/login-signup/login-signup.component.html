@@ -1,0 +1,76 @@
+<div class="auth-wrapper">
+  <div class="promo-card">
+    <img src="assets/images/bookshopping.png" alt="Book Shopping" />
+    <h3>ONLINE BOOK SHOPPING</h3>
+  </div>
+
+  <div class="auth-card">
+    <mat-tab-group [(selectedIndex)]="tabIndex">
+      <mat-tab label="LOGIN">
+        <ng-template matTabContent>
+          <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <mat-form-field appearance="fill">
+              <mat-label>Email Id</mat-label>
+              <input matInput formControlName="email" />
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" />
+              <button mat-icon-button matSuffix (click)="hide = !hide" type="button">
+                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </mat-form-field>
+
+            <a class="forgot-password" href="#">Forgot Password?</a>
+
+            <button mat-raised-button class="login-btn" type="submit">Login</button>
+
+            <div class="or-divider">OR</div>
+
+            <div class="social-buttons">
+              <button mat-raised-button color="primary">Facebook</button>
+              <button mat-raised-button>Google</button>
+            </div>
+          </form>
+        </ng-template>
+      </mat-tab>
+
+      <mat-tab label="SIGNUP">
+        <ng-template matTabContent>
+          <form class="form" [formGroup]="signupForm" (ngSubmit)="onSignup()">
+            <mat-form-field appearance="fill">
+              <mat-label>Full Name</mat-label>
+              <input matInput formControlName="fullName" />
+              <mat-error *ngIf="signupForm.get('fullName')?.hasError('required')">
+                Enter full name
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Email Id</mat-label>
+              <input matInput formControlName="email" />
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" />
+              <button mat-icon-button matSuffix (click)="hide = !hide" type="button">
+                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Mobile Number</mat-label>
+              <input matInput formControlName="mobile" />
+            </mat-form-field>
+
+            <button mat-raised-button color="accent" class="full-width" [disabled]="loading">
+              Signup
+            </button>
+          </form>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
