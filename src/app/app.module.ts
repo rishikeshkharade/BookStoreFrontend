@@ -16,12 +16,27 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { BookCardComponent } from './components/book-card/book-card.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginSignupComponent,
+    DashboardComponent,
+    HeaderComponent,
+    FooterComponent,
+    BookCardComponent,
+    PaginationComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +51,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatSelectModule,
+    MatProgressSpinnerModule
 
   ],
   providers: [{

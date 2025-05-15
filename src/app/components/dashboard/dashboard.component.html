@@ -1,0 +1,24 @@
+<app-header></app-header>
+
+<div class="dashboard-wrapper">
+  <h2 class="section-title">Books <span>(128 items)</span></h2>
+
+  <div class="sort-bar">
+    <mat-form-field appearance="outline">
+      <mat-label>Sort by</mat-label>
+      <mat-select>
+        <mat-option value="relevance">Relevance</mat-option>
+        <mat-option value="lowToHigh">Price: Low to High</mat-option>
+        <mat-option value="highToLow">Price: High to Low</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="books-grid">
+    <app-book-card *ngFor="let book of books"></app-book-card>
+  </div>
+
+  <app-pagination></app-pagination>
+</div>
+
+<app-footer></app-footer>

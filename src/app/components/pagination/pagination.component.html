@@ -1,0 +1,17 @@
+<div class="pagination-wrapper">
+  <button mat-icon-button>
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+
+  <div class="pages">
+    <button *ngFor="let page of pages; let i = index"
+            mat-button
+            [class.active]="i === currentPage">
+      {{ i + 1 }}
+    </button>
+  </div>
+
+  <button mat-icon-button>
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>

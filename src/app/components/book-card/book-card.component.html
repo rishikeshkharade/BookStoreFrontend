@@ -1,0 +1,21 @@
+<div class="book-card">
+  <div class="image-wrapper">
+    <img src="assets/images/dummy-book.jpg" alt="Book Cover" />
+    <div class="out-of-stock" *ngIf="book?.stock === 0">OUT OF STOCK</div>
+  </div>
+
+  <div class="details">
+    <h4>{{ book?.title || "Don't Make Me Think" }}</h4>
+    <p class="author">by {{ book?.author || "Steve Krug" }}</p>
+
+    <div class="rating">
+      <span class="rate-box">4.5 ★</span>
+      <span class="count">(20)</span>
+    </div>
+
+    <div class="price">
+      <span class="discounted">Rs. 1500</span>
+      <span class="original">Rs. 2000</span>
+    </div>
+  </div>
+</div>

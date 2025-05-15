@@ -1,0 +1,23 @@
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+
+  button {
+    min-width: 32px;
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .pages {
+    display: flex;
+    gap: 6px;
+
+    .active {
+      background-color: #a03037;
+      color: white;
+    }
+  }
+}

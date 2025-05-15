@@ -1,0 +1,43 @@
+<header class="header">
+  <div class="logo">
+    <mat-icon>menu_book</mat-icon>
+    <span>Bookstore</span>
+  </div>
+
+  <div class="search-bar">
+    <mat-form-field appearance="outline">
+      <mat-label>Search …</mat-label>
+      <input matInput />
+      <button mat-icon-button matSuffix>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <div class="actions">
+    <div class="profile-menu" [matMenuTriggerFor]="menu">
+      <mat-icon>person</mat-icon>
+      <span>Poonam</span>
+    </div>
+
+    <button mat-icon-button>
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <div class="profile-menu-wrapper">
+        <p>Hello Poonam,</p>
+        <button mat-menu-item>
+          <mat-icon>person</mat-icon> Profile
+        </button>
+        <button mat-menu-item>
+          <mat-icon>assignment</mat-icon> My Orders
+        </button>
+        <button mat-menu-item>
+          <mat-icon>favorite</mat-icon> My Wishlist
+        </button>
+        <button mat-menu-item class="logout-btn">Logout</button>
+      </div>
+    </mat-menu>
+  </div>
+</header>

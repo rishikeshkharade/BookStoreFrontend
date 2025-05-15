@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginSignupComponent } from './components/login-signup/login-signup.component';
-import { AuthService } from './services/auth-guard/auth.service';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AuthGuard } from './services/auth-guard/auth.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },  // open this on startup
-  { path: 'auth', component: LoginSignupComponent },
-  { path: '**', redirectTo: 'auth' }  // fallback route
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginSignupComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
 ];
 
 

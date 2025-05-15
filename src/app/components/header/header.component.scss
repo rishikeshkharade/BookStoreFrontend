@@ -1,0 +1,74 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #a03037;
+  padding: 10px 30px;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: bold;
+
+    mat-icon {
+      font-size: 24px;
+    }
+  }
+
+  .search-bar {
+    flex: 1;
+    margin: 0 40px;
+
+    mat-form-field {
+      width: 100%;
+      background-color: white;
+      border-radius: 4px;
+
+      input {
+        padding: 6px 12px;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: white;
+
+    .profile-menu {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      gap: 6px;
+    }
+
+    .logout-btn {
+      width: 100%;
+      color: #a03037;
+      border: 1px solid #a03037;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    .profile-menu-wrapper {
+      padding: 10px 20px;
+      width: 180px;
+
+      p {
+        margin: 0 0 10px 0;
+        font-weight: bold;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
