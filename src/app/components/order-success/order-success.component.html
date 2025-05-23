@@ -1,0 +1,36 @@
+<app-header></app-header>
+
+<div class="order-success-wrapper">
+  <img src="assets/images/order_success.png" alt="Order Placed Successfully" />
+
+  <p>
+    hurray!!! your order is confirmed<br />
+    the order id is <strong>{{ orderId }}</strong> save the order id for further communication..
+  </p>
+
+<table class="info-table">
+  <thead>
+    <tr>
+      <th>Email us</th>
+      <th>Contact us</th>
+      <th>Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>admin&#64;bookstore.com</td>
+      <td>+91 8163475881</td>
+      <td>
+        42, 14th Main, 15th Cross, Sector 4, opp to BDA complex,<br />
+        near Kumarakom restaurant, HSR Layout, Bangalore 560034
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+  <button (click)="goToDashboard()">CONTINUE SHOPPING</button>
+</div>
+
+<app-footer></app-footer>

@@ -2,12 +2,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #d9d9d9;
+  min-height: 100vh;
   overflow: hidden;
   flex-wrap: wrap;
   padding: 16px;
   gap: 30px;
+  transition: background-color 0.4s ease;
+
+   &.signup-mode {
+    background-color: #bfbfbf; // Darker gray for Signup
+  }
+
+  &.login-mode {
+    background-color: #707070; // Lighter gray for Login
+  }
 }
 
 .promo-card {
@@ -47,7 +55,7 @@
   width: 350px;
   border-radius: 10px;
   padding: 32px 24px 24px 24px;
-  box-shadow: 0px 0px 10px #ccc;
+box-shadow: 0 0 4px rgba(0, 0, 0, 0.05); // Very soft
   display: flex;
   flex-direction: column;
   overflow: hidden !important;
@@ -55,7 +63,8 @@
   position: relative;
   margin-left: -100px;
   z-index: 2;
-  height: 460px;
+  min-height: 460px;
+  
 
   .login-form,
   .form {
@@ -159,21 +168,67 @@
 }
 
 /* Tabs Styling */
-::ng-deep .mat-tab-label {
-  font-weight: 700 !important;
-  color: #333 !important;
+/* Inactive Tab */
+::ng-deep .mat-mdc-tab-label {
+  font-weight: 700 !important; /* increased from 600 to 700 */
+  color: #9e9e9e !important;
+  font-size: 15px;
 }
 
-::ng-deep .mat-tab-label-active {
-  font-weight: 700 !important;
-  color: #000 !important;
-  border-bottom: 3px solid #a03037 !important;
+/* Active Tab */
+::ng-deep .mat-mdc-tab-label.mat-mdc-tab-label-active {
+  font-weight: 800 !important; /* increased from 700 to 800 */
+  color: #000000 !important;
 }
 
-::ng-deep .mat-ink-bar {
+/* Kill blue focus effect */
+::ng-deep .mat-mdc-tab-label:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  color: #000000 !important;
+}
+
+/* Red pill underline */
+::ng-deep .mat-mdc-tab-header .mdc-tab-indicator__content--underline {
   background-color: #a03037 !important;
-  height: 3px !important;
+  height: 5px !important;
+  border-radius: 4px !important;
+  width: 28px !important;
+  margin: 0 auto !important;
 }
+
+/* Extra override to nuke MDC blue ink */
+::ng-deep .mdc-tab--active .mdc-tab__text-label {
+  color: #000000 !important;
+}
+
+::ng-deep .mdc-tab-indicator__content--underline {
+  background-color: #a03037 !important;
+  height: 5px !important;
+  border-radius: 4px;
+  width: 28px;
+  margin: 0 auto;
+}
+
+::ng-deep .mdc-tab__ripple,
+::ng-deep .mat-mdc-focus-indicator::before {
+  display: none !important;
+}
+
+
+/* Hide extra ripple/blue active bar completely */
+// ::ng-deep .mat-mdc-tab .mdc-tab__ripple,
+// ::ng-deep .mat-mdc-tab .mat-mdc-focus-indicator::before {
+//   display: none !important;
+// }
+
+// /* Remove lingering blue shadow effect */
+// ::ng-deep .mat-mdc-tab-label .mdc-tab-indicator {
+//   display: none !important;
+// }
+
+
+
 
 /* Scroll Fix */
 ::ng-deep .mat-tab-body-content {
@@ -225,26 +280,40 @@ mat-form-field input {
 
   .auth-wrapper {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     height: auto;
     padding: 20px;
   }
 
   .auth-card {
-    max-width: 100%;
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
   }
 }
+
 
 @media (max-width: 480px) {
-  .promo-card h3 {
-    font-size: 14px;
-  }
-
   .auth-card {
     padding: 16px;
-    max-height: 90vh;
-    overflow: hidden !important;
+    max-height: none;
+  }
+
+  .auth-wrapper {
+    padding: 12px;
+    flex-direction: column;
+    position: relative;
+  top: 50%;
+  transform: translateY(-50%)
+  }
+
+  .login-btn,
+  .full-width {
+    font-size: 14px;
   }
 }
+
 
 
 ::ng-deep .mat-mdc-tab-body-content {
@@ -255,4 +324,19 @@ mat-form-field input {
 
 ::ng-deep .mat-mdc-tab-body-content::-webkit-scrollbar {
   display: none;
+}
+
+
+.active-tab {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700; /* Medium */
+  font-size: 20px;
+  color: #000000;
+}
+
+.inactive-tab {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #9e9e9e;
 }

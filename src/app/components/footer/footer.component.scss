@@ -1,8 +1,15 @@
 .footer {
-  background-color: #f1f1f1;
-  padding: 16px;
-  text-align: center;
+  background-color: #2c1e1e; // dark brown/black tone
+  padding: 8px 24px;
+  color: #fff;
   font-size: 13px;
-  color: #777;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #111;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+footer *:not(input):not(textarea):not(button) {
+  caret-color: transparent;
+  user-select: none;
 }

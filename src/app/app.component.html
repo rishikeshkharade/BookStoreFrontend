@@ -1,2 +1,2 @@
-<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+<app-loading-spinner *ngIf="loading$ | async"></app-loading-spinner>
 <router-outlet></router-outlet>

@@ -40,44 +40,79 @@ export class LoginSignupComponent {
   }
 
 onLogin(): void {
-    if (this.loginForm.invalid) { this.loginForm.markAllAsTouched(); return; }
-
-    this.loader.show(); // Show global spinner
-  this.error = null;
-
-    this.userService.login(this.loginForm.value).subscribe({
-      next: (res) => { this.loader.hide();
-
-        localStorage.setItem('accessToken', res.data.accessToken);
-        localStorage.setItem('refreshToken', res.data.refreshToken);
-       
-      this.snackBar.open('Login successful!', '', { duration: 3000, panelClass: ['green-snackbar'] });
-
-        this.router.navigate(['/dashboard']); // Redirect to home or dashboard
-      
-      },
-      error: (err) => { this.loader.hide(); this.error = err.error?.message || 'Login failed'; 
-        this.snackBar.open(this.error ?? 'Something went wrong', '', { duration: 3000, panelClass: ['red-snackbar'] });
-      }
-    });
+  if (this.loginForm.invalid) {
+    this.loginForm.markAllAsTouched();
+    return;
   }
-
-onSignup(): void {
-    if (this.signupForm.invalid) { this.signupForm.markAllAsTouched(); return; }
 
   this.loader.show(); // Show global spinner
   this.error = null;
 
-    this.userService.signup(this.signupForm.value).subscribe({
-      next: () => { this.loader.hide(); /* switch to login tab or auto-login */ 
+  this.userService.login(this.loginForm.value).subscribe({
+    next: (res) => {
+      localStorage.setItem('accessToken', res.data.accessToken);
+      localStorage.setItem('refreshToken', res.data.refreshToken);
+      localStorage.setItem('user', JSON.stringify({ fullName: res.data.fullName }));
 
-        this.snackBar.open('Signup successful! Please login.', '', { duration: 3000, panelClass: ['green-snackbar'] });
-        this.tabIndex = 0; // Switch to login tab     
-        },
-      error: err => { this.loader.hide(); this.error = err.error?.message || 'Signup failed';
-        this.snackBar.open(this.error ?? 'Something went wrong', '', { duration: 3000, panelClass: ['red-snackbar'] });
-       }
-    });
+
+      this.snackBar.open('Login successful!', '', {
+        duration: 3000,
+        panelClass: ['green-snackbar']
+      });
+
+      //  Delay navigation to avoid ExpressionChangedAfterItHasBeenCheckedError
+      setTimeout(() => {
+        this.router.navigate(['/dashboard']);
+        this.loader.hide(); // Move inside setTimeout
+      }, 0);
+    },
+    error: (err) => {
+      this.loader.hide();
+      this.error = err.error?.message || 'Login failed';
+      this.snackBar.open(this.error ?? 'Something went wrong', '', {
+        duration: 3000,
+        panelClass: ['red-snackbar']
+      });
+    }
+  });
+}
+
+
+onSignup(): void {
+  if (this.signupForm.invalid) {
+    this.signupForm.markAllAsTouched();
+    return;
   }
+
+  this.loader.show(); // Show global spinner
+  this.error = null;
+
+  this.userService.signup(this.signupForm.value).subscribe({
+    next: () => {
+      this.snackBar.open('Signup successful! Please login.', '', {
+        duration: 3000,
+        panelClass: ['green-snackbar']
+      });
+
+      // Safely switch to login tab after Angular has finished its checks
+      setTimeout(() => {
+        this.tabIndex = 0;
+        this.loader.hide();
+      }, 0);
+    },
+    error: err => {
+      this.loader.hide();
+      this.error = err.error?.message || 'Signup failed';
+      this.snackBar.open(this.error ?? 'Something went wrong', '', {
+        duration: 3000,
+        panelClass: ['red-snackbar']
+      });
+    }
+  });
+}
+
+  onTabChange(index: number) {
+  this.tabIndex = index;
+}
   }
   

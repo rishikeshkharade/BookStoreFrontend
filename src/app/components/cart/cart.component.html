@@ -1,0 +1,165 @@
+<app-header></app-header>
+
+
+<div class="cart-wrapper">
+  <div class="breadcrumb">
+  <a routerLink="/dashboard">Home</a> / <span>My Cart</span>
+</div>
+
+  <!-- === SECTION: MY CART === -->
+  <div class="section-card">
+    <div class="section-header" (click)="toggleSection('cart')">
+  <h2>
+    My Cart
+    <span *ngIf="cartItems.length > 0">({{ cartItems.length.toString().padStart(2, '0') }})</span>
+  </h2>
+</div>
+
+
+    <div class="section-body" *ngIf="showCart">
+      <div *ngIf="cartItems.length === 0" class="empty-cart-message">
+        <mat-icon>shopping_cart</mat-icon>
+        <h2>Your cart is empty</h2>
+        <p>Start adding books you love!</p>
+      </div>
+
+      <div *ngIf="cartItems.length > 0">
+        <div class="cart-item" *ngFor="let item of cartItems">
+          <img [src]="getImageUrl(item.book?.bookImage || item.bookImage)" alt="{{ item.book?.bookName || item.bookName }}" />
+          <div class="details">
+            <h3>{{ item.book?.bookName || item.bookName }}</h3>
+            <p class="author">by {{ item.book?.author || item.author }}</p>
+            <div class="price">
+              Rs. {{ item.book?.discountPrice || item.discountPrice }}
+              <span class="original">Rs. {{ item.book?.price || item.price }}</span>
+            </div>
+            <div class="action-row">
+              <div class="quantity-controls">
+                <button (click)="decreaseQty(item)">-</button>
+                <input type="text" [value]="item.quantity" readonly />
+                <button (click)="increaseQty(item)">+</button>
+              </div>
+              <button class="remove-btn" (click)="removeItem(item)">Remove</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="place-order">
+          <button (click)="toggleSection('address')">PLACE ORDER</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <!-- === SECTION: CUSTOMER DETAILS === -->
+<!-- === SECTION: CUSTOMER DETAILS === -->
+<div class="section-card">
+  <div class="section-header" (click)="toggleSection('address')">
+    <h2>Customer Details</h2>
+  </div>
+
+  <div class="section-body" *ngIf="showAddress">
+    <form *ngIf="customerForm" [formGroup]="customerForm" class="form">
+
+      <!-- Full Name -->
+      <mat-form-field appearance="fill">
+        <mat-label>Full Name</mat-label>
+        <input matInput formControlName="fullName" />
+        <mat-error *ngIf="customerForm.get('fullName')?.touched && customerForm.get('fullName')?.invalid">
+          Full name is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Mobile Number -->
+      <mat-form-field appearance="fill">
+        <mat-label>Mobile Number</mat-label>
+        <input matInput formControlName="mobile" />
+        <mat-error *ngIf="customerForm.get('mobile')?.touched && customerForm.get('mobile')?.invalid">
+          Mobile number must be 10 digits.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Address Type -->
+      <div class="address-type">
+        <label class="type-label">Type</label>
+        <mat-radio-group formControlName="type" class="radio-group">
+          <mat-radio-button value="Home">Home</mat-radio-button>
+          <mat-radio-button value="Work">Work</mat-radio-button>
+          <mat-radio-button value="Other">Other</mat-radio-button>
+        </mat-radio-group>
+        <mat-error *ngIf="customerForm.get('type')?.touched && customerForm.get('type')?.invalid">
+          Please select an address type.
+        </mat-error>
+      </div>
+
+      <!-- Address -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Address</mat-label>
+        <textarea matInput formControlName="address"></textarea>
+        <mat-error *ngIf="customerForm.get('address')?.touched && customerForm.get('address')?.invalid">
+          Address is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- City -->
+      <mat-form-field appearance="fill">
+        <mat-label>City/Town</mat-label>
+        <input matInput formControlName="city" />
+        <mat-error *ngIf="customerForm.get('city')?.touched && customerForm.get('city')?.invalid">
+          City/Town is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- State -->
+      <mat-form-field appearance="fill">
+        <mat-label>State</mat-label>
+        <input matInput formControlName="state" />
+        <mat-error *ngIf="customerForm.get('state')?.touched && customerForm.get('state')?.invalid">
+          State is required.
+        </mat-error>
+      </mat-form-field>
+    </form>
+
+    <div class="place-order">
+      <button mat-raised-button color="primary"
+        [disabled]="!customerForm.valid"
+        (click)="onContinueToSummary()">CONTINUE</button>
+
+    </div>
+  </div>
+</div>
+
+
+
+  <!-- === SECTION: ORDER SUMMARY === -->
+  <div class="section-card">
+    <div class="section-header" (click)="toggleSection('summary')">
+      <h2>Order Summary</h2>
+    </div>
+
+<div class="section-body" *ngIf="showSummary">
+  <div class="summary-item" *ngFor="let item of cartItems">
+    <img [src]="getImageUrl(item.book?.bookImage || item.bookImage)" alt="{{ item.book?.bookName || item.bookName }}" />
+    
+    <div class="summary-details">
+      <h3>{{ item.book?.bookName || item.bookName }}</h3>
+      <p class="author">by {{ item.book?.author || item.author }}</p>
+      <div class="price">
+        Rs. {{ item.book?.discountPrice || item.discountPrice }}
+        <span class="original">Rs. {{ item.book?.price || item.price }}</span>
+      </div>
+    </div>
+
+    <div class="summary-qty">Qty: {{ item.quantity }}</div>
+    <div class="summary-total">Rs. {{ item.quantity * (item.book?.discountPrice || item.discountPrice) }}</div>
+  </div>
+
+  <div class="place-order">
+    <button (click)="finalPlaceOrder()">CHECKOUT</button>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<app-footer></app-footer>

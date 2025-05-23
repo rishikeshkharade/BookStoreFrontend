@@ -1,12 +1,15 @@
-<div class="auth-wrapper">
+<div [ngClass]="tabIndex === 1 ? 'auth-wrapper signup-mode' : 'auth-wrapper login-mode'">
   <div class="promo-card">
     <img src="assets/images/bookshopping.png" alt="Book Shopping" />
     <h3>ONLINE BOOK SHOPPING</h3>
   </div>
 
   <div class="auth-card">
-    <mat-tab-group [(selectedIndex)]="tabIndex">
+    <mat-tab-group [(selectedIndex)]="tabIndex" (selectedIndexChange)="onTabChange($event)">
       <mat-tab label="LOGIN">
+        <ng-template matTabLabel>
+      <span [ngClass]="{ 'active-tab': tabIndex === 0, 'inactive-tab': tabIndex !== 0 }">LOGIN</span>
+    </ng-template>
         <ng-template matTabContent>
           <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
             <mat-form-field appearance="fill">
@@ -46,6 +49,9 @@
       </mat-tab>
 
       <mat-tab label="SIGNUP">
+         <ng-template matTabLabel>
+      <span [ngClass]="{ 'active-tab': tabIndex === 1, 'inactive-tab': tabIndex !== 1 }">SIGNUP</span>
+    </ng-template>
         <ng-template matTabContent>
           <form class="form" [formGroup]="signupForm" (ngSubmit)="onSignup()">
             <mat-form-field appearance="fill">

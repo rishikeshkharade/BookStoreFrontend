@@ -1,0 +1,37 @@
+<app-header></app-header>
+
+<div class="main-container">
+  <div class="wishlist-wrapper">
+    <div class="breadcrumb">
+      <a routerLink="/dashboard">Home</a> / <span>My Wishlist</span>
+    </div>
+
+    <div class="wishlist-container">
+      
+      <h2 *ngIf="wishlistItems.length > 0">
+        My Wishlist ({{ wishlistItems.length.toString().padStart(2, '0') }})
+      </h2>
+
+      <div class="empty-message" *ngIf="wishlistItems.length === 0">
+        Your wishlist is empty 😢
+      </div>
+
+      <div class="wishlist-item" *ngFor="let item of wishlistItems">
+        <img [src]="getImageUrl(item.bookImage)" alt="{{ item.bookName }}" />
+        <div class="details">
+          <h3>{{ item.bookName }}</h3>
+          <p class="author">by {{ item.author }}</p>
+          <div class="price">
+            Rs. {{ item.discountPrice }}
+            <span class="original">Rs. {{ item.price }}</span>
+          </div>
+        </div>
+        <button class="delete-btn" (click)="remove(item)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

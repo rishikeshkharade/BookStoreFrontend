@@ -1,24 +1,46 @@
-<app-header></app-header>
+<app-header (search)="onSearchInput($event)"></app-header>
 
 <div class="dashboard-wrapper">
-  <h2 class="section-title">Books <span>(128 items)</span></h2>
+  <div class="dashboard-header">
+    <h2 class="section-title">
+      Books <span>({{ allBooks.length }} items)</span>
+    </h2>
 
-  <div class="sort-bar">
-    <mat-form-field appearance="outline">
-      <mat-label>Sort by</mat-label>
-      <mat-select>
-        <mat-option value="relevance">Relevance</mat-option>
-        <mat-option value="lowToHigh">Price: Low to High</mat-option>
-        <mat-option value="highToLow">Price: High to Low</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="sort-wrapper">
+      <mat-form-field appearance="fill">
+        <mat-select
+          disableRipple
+          placeholder="Sort by"
+          (selectionChange)="onSortChange($event.value)"
+          panelClass="custom-sort-panel">
+          <mat-option value="lowToHigh">Price : Low to High</mat-option>
+          <mat-option value="highToLow">Price : High to Low</mat-option>
+          <mat-option value="recent">Newest Arrivals</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
 
   <div class="books-grid">
-    <app-book-card *ngFor="let book of books"></app-book-card>
+    <app-book-card
+      *ngFor="let book of books"
+      [book]="book"
+      (viewDetails)="navigateToBook($event)">
+    </app-book-card>
   </div>
 
-  <app-pagination></app-pagination>
+  <p class="no-books-message" *ngIf="books.length === 0">
+  No books match your search.
+</p>
+
+
+  <app-pagination
+    [totalItems]="allBooks.length"
+    [pageSize]="pageSize"
+    [currentPage]="currentPage"
+    (pageChange)="onPageChange($event)">
+  </app-pagination>
 </div>
+
 
 <app-footer></app-footer>

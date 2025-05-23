@@ -1,0 +1,28 @@
+<app-header></app-header>
+
+<div class="orders-wrapper">
+  <div class="breadcrumb">
+    <a routerLink="/dashboard">Home</a> / <span>My Orders</span>
+  </div>
+
+ 
+  <div *ngFor="let order of orders" class="order-card">
+  <img [src]="getImageUrl(order.book?.bookImage)" alt="{{ order.book?.bookName }}" />
+  <div class="details">
+    <h3>{{ order.book?.bookName }}</h3>
+    <p class="author">by {{ order.book?.author }}</p>
+    <div class="price">
+      Rs. {{ order.price }}
+      <span class="original">Rs. {{ order.book?.price }}</span>
+    </div>
+  </div>
+  <div class="date">
+    <span class="dot"></span>
+    Order Placed on {{ formatDate(order.purchaseAt) }}
+  </div>
+</div>
+
+</div>
+
+<app-footer></app-footer>
+
